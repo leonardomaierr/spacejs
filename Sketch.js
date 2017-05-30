@@ -24,6 +24,7 @@ function draw() {
 		enemy.show();
 	});
 
+	// POG
 	bullets.forEach(bullet => {
 		bullet.show();
 		bullet.move();
@@ -31,13 +32,20 @@ function draw() {
 		if (bullet.hitsWall()) {
 			bullets.splice(bullet, 1);
 		}
-	});
 
-	/*
-	for (var i = 0; i < bullets.length; i++){
-		bullets[i].show();
-	}
-	*/
+		for (var i = 0; i < enemies.length; i++) {
+			
+			if (bullet.hitsEnemy(enemies[i])) {
+				bullets.splice(bullet, 1);
+				enemies[i].killEnemy();
+			}
+
+			if (enemies[i]._toDelete) {
+				enemies.splice(i, 1);
+			}
+		}
+
+	});
 }
 
 function keyReleased() {
@@ -51,7 +59,9 @@ function keyPressed() {
 		bullet = new Bullet(ship.x, height - 20);
 		bullets.push(bullet);
 
+		// console.log: the best debugger that you respect
 		console.log(bullets);
+		console.log(enemies);
 	} 
 
 	if (keyCode === RIGHT_ARROW) {

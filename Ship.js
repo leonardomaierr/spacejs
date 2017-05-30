@@ -11,12 +11,11 @@ function Ship() {
 	}
 
 	this.move = function() {
-
 		this.x += this.xdir * 5;
 	}
 
 	this.setDir = function(dir) {
-		
+
 		this.xdir = dir;
 	}
 
